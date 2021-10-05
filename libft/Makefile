@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gjacqual <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: gjacqual <gjacqual@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/08 17:47:04 by gjacqual          #+#    #+#              #
-#    Updated: 2021/05/15 16:22:23 by gjacqual         ###   ########.fr        #
+#    Updated: 2021/10/06 01:00:40 by gjacqual         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ OBJS 	= $(SRCS:.c=.o)
 
 CFLAGS	= -Wall -Wextra -Werror
 
-CC	= gcc
+CC	= clang
 
 RM	= rm -f
 
