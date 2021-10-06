@@ -20,21 +20,23 @@ OBJ_CLIENT 	:= ${SRC_CLIENT:.c=.o}
 HEADERS_PATH := includes/
 INC			:= -I${HEADERS_PATH}  -I${LIBFT_DIR}
 
-all:	${SERVER} ${CLIENT}
+all:	${SERVER} ${CLIENT} 
 
-${SERVER}: ${OBJ_SERVER} ${LIBFT}
-	@ ${CC} ${CFLAGS} ${LIBFT} ${INC} -o ${SERVER} ${OBJ_SERVER}
+${LIBFT_LIB}: 
+	@make -C ./${LIBFT_DIR}
+
+${SERVER}: ${OBJ_SERVER} ${LIBFT_LIB} 
+	@ ${CC} ${CFLAGS} ${LIBFT_LIB} ${INC} -o ${SERVER} ${OBJ_SERVER}
 	@echo "server is ready"	
 
-${CLIENT}: ${OBJ_CLIENT} ${LIBFT}
-	@ ${CC} ${CFLAGS} ${LIBFT} ${INC} -o ${CLIENT} ${OBJ_CLIENT}
+${CLIENT}: ${OBJ_CLIENT} ${LIBFT_LIB}
+	@ ${CC} ${CFLAGS} ${LIBFT_LIB} ${INC} -o ${CLIENT} ${OBJ_CLIENT}
 	@echo "client is ready"	
 
-${LIBFT}: 
-	${MAKE} -C ${LIBFT_DIR}
+
 
 clean:
-		${MAKE} -C libft clean
+		${MAKE} -C ${LIBFT_DIR} clean
 		rm -rf ${OBJ_CLIENT} ${OBJ_SERVER}
 
 fclean: clean

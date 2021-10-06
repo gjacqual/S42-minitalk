@@ -8,8 +8,8 @@
 int main(int argc, char **argv)
 {
 	(void)argc;
-	(void)argv;
-	
+	(void)argv; 
+
 	char c = 'A';
 	int num = 64;
 
