@@ -6,15 +6,32 @@
 /*   By: gjacqual <gjacqual@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 01:56:52 by gjacqual          #+#    #+#             */
-/*   Updated: 2021/10/06 03:19:29 by gjacqual         ###   ########.fr       */
+/*   Updated: 2021/10/07 19:27:20 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minitalk.h"
+#include "../minitalk.h"
 #include "../libft/libft.h"
 
 void	ft_signal_handler(int sig_nb, siginfo_t *sig_info, void *context)
 {
+	static char	ch;
+	static int count;
+	
+	(void)context;
+	 
+	if (sig_nb == SIGUSR1)
+		//ch |= (1 << count);
+	count++;
+	
+	if(count == 8)
+	{
+		// ft_putchar_fd(ch, 1);
+		// ch = 0;
+		// count = 0;
+		// if (kill(sig_info->si_pid, SIGUSR1) == -1)
+		// 	ft_putstr_fd("Signal error", 1);
+	}
 
 }
 

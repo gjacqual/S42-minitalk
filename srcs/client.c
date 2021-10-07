@@ -1,24 +1,16 @@
-#include "../includes/minitalk.h"
+#include "../minitalk.h"
+#include "../libft/libft.h"
 
 
 
-/* delete before upload */
-#include <stdio.h>
-/* delete before upload */
-int main(int argc, char **argv)
+int main (int argc, char **argv)
 {
-	(void)argc;
-	(void)argv; 
+	if (argc == 3)
+	{
 
-	char c = 'A';
-	int num = 64;
- 
-	printf("%d\n", c & num);
+	}
+	else
+		ft_putstr_fd("Please enter the PID and a message after ./client\n", 1);
+		
 	return (0);
 }
- 
-
-
-
-
-

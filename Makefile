@@ -17,8 +17,7 @@ OBJ_SERVER 	:= ${SRC_SERVER:.c=.o}
 SRC_CLIENT	:= ${SRC_DIR}/client.c
 OBJ_CLIENT 	:= ${SRC_CLIENT:.c=.o}
 
-HEADERS_PATH := includes/
-INC			:= -I${HEADERS_PATH}  -I${LIBFT_DIR}
+INC			:= -I -I${LIBFT_DIR}
 
 all:	${SERVER} ${CLIENT} 
 
