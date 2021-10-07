@@ -12,11 +12,11 @@ int main(int argc, char **argv)
 
 	char c = 'A';
 	int num = 64;
-
+ 
 	printf("%d\n", c & num);
 	return (0);
 }
-
+ 
 
 
 
