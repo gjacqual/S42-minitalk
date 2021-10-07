@@ -6,7 +6,7 @@
 /*   By: gjacqual <gjacqual@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 01:56:52 by gjacqual          #+#    #+#             */
-/*   Updated: 2021/10/07 19:27:20 by gjacqual         ###   ########.fr       */
+/*   Updated: 2021/10/07 21:52:00 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,20 @@
 
 void	ft_signal_handler(int sig_nb, siginfo_t *sig_info, void *context)
 {
-	static char	ch;
-	static int count;
-	
-	(void)context;
-	 
-	if (sig_nb == SIGUSR1)
-		//ch |= (1 << count);
-	count++;
-	
-	if(count == 8)
-	{
-		// ft_putchar_fd(ch, 1);
-		// ch = 0;
-		// count = 0;
-		// if (kill(sig_info->si_pid, SIGUSR1) == -1)
-		// 	ft_putstr_fd("Signal error", 1);
-	}
+	static unsigned char		symbol = 0;
+	static int					count = 0;
 
+	(void)context;
+	if (sig_nb == SIGUSR1)
+		symbol |= (1 << count);
+	
+	// if (++count == 8)
+	// {
+	// 	count = 0;
+	// 	ft_putchar_fd(symbol, 1);
+	// 	symbol = 0;
+	// 	kill(sig_info->si_pid, SIGUSR1);
+	// }
 }
 
 static void	ft_putpid(void)
@@ -52,10 +48,10 @@ int	main(void)
 	int sig_check2;
 
 	ft_putpid();
-
-	action.sa_sigaction = ft_signal_handler;
+	
 	action.sa_flags = SA_SIGINFO;
-
+	action.sa_sigaction = ft_signal_handler;
+	
 	sigemptyset(&action.sa_mask);
 	sigaddset(&action.sa_mask, SIGUSR1);
 	sigaddset(&action.sa_mask, SIGUSR2);

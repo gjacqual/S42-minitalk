@@ -5,6 +5,9 @@
 
 int main (int argc, char **argv)
 {
+
+	struct sigaction	action; 
+
 	if (argc == 3)
 	{
 
@@ -13,4 +16,4 @@ int main (int argc, char **argv)
 		ft_putstr_fd("Please enter the PID and a message after ./client\n", 1);
 		
 	return (0);
-}
+} 
