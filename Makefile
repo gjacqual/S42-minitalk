@@ -32,19 +32,19 @@ all:	${SERVER} ${CLIENT}
 ${LIBFT_LIB}: 
 	@make -C ./${LIBFT_DIR}
 
-${SERVER}: ${OBJ_SERVER} ${LIBFT_LIB} 
+${SERVER}: ${OBJ_SERVER} ${LIBFT_LIB} minitalk.h
 	@ ${CC} ${CFLAGS} ${LIBFT_LIB} ${INC} -o ${SERVER} ${OBJ_SERVER}
 	@echo "server is ready"	
 
-${CLIENT}: ${OBJ_CLIENT} ${LIBFT_LIB}
+${CLIENT}: ${OBJ_CLIENT} ${LIBFT_LIB} minitalk.h
 	@ ${CC} ${CFLAGS} ${LIBFT_LIB} ${INC} -o ${CLIENT} ${OBJ_CLIENT}
 	@echo "client is ready"	
 
-${SERVER_B}: ${OBJ_SERVER_B} ${LIBFT_LIB} 
+${SERVER_B}: ${OBJ_SERVER_B} ${LIBFT_LIB} minitalk.h
 	@ ${CC} ${CFLAGS} ${LIBFT_LIB} ${INC} -o ${SERVER_B} ${OBJ_SERVER_B}
 	@echo "server Bonus is ready"	
 
-${CLIENT_B}: ${OBJ_CLIENT_B} ${LIBFT_LIB}
+${CLIENT_B}: ${OBJ_CLIENT_B} ${LIBFT_LIB} minitalk.h
 	@ ${CC} ${CFLAGS} ${LIBFT_LIB} ${INC} -o ${CLIENT_B} ${OBJ_CLIENT_B}
 	@echo "client Bonus is ready"
 
