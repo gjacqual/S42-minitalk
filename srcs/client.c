@@ -1,19 +1,96 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gjacqual <gjacqual@student.21-school.ru    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/08 16:57:46 by gjacqual          #+#    #+#             */
+/*   Updated: 2021/10/08 21:03:43 by gjacqual         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minitalk.h"
 #include "../libft/libft.h"
 
-
-
-int main (int argc, char **argv)
+static void	ft_server_signal_handler(int sig_nb)
 {
-
-	struct sigaction	action; 
-
-	if (argc == 3)
+	if (sig_nb == SIGUSR1)
 	{
-
+		ft_putstr_fd("Signal received!\n", 1);
 	}
-	else
+	if (sig_nb == SIGUSR2)
+	{	
+		ft_putstr_fd("Signal status: no signal!\n", 1);
+	}
+}
+
+static int	ft_bit_decoder(int symbol, int pid)
+{	
+	int	count;
+
+	count = 0;
+	while (count < 8)
+	{
+		if ((symbol >> count) & 1)
+		{
+			if (kill(pid, SIGUSR1) != 0)
+			{
+				ft_putstr_fd("Signal error!\n", 1);
+				return (0);
+			}
+		}
+		else
+		{
+			if (kill(pid, SIGUSR2) != 0)
+			{
+				ft_putstr_fd("Signal error!\n", 1);
+				return (0);
+			}
+		}
+		count++;
+		usleep(100);
+	}
+	return (1);
+}
+
+static int	bit_sender(char *message, int pid)
+{
+	int	i;
+
+	i = 0;
+	while (message[i] != '\0')
+	{
+		if (ft_bit_decoder(message[i], pid) != 1)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	main(int argc, char **argv)
+{
+	struct sigaction	serv_act;
+	siginfo_t			siginfo;
+	int					pid;
+
+	if (argc != 3)
 		ft_putstr_fd("Please enter the PID and a message after ./client\n", 1);
-		
+	else
+	{
+		pid = ft_atoi(argv[1]);
+		serv_act.sa_flags = SA_RESTART;
+		serv_act.sa_handler = &ft_server_signal_handler;
+		sigemptyset(&serv_act.sa_mask);
+		sigaddset(&serv_act.sa_mask, SIGUSR1);
+		sigaddset(&serv_act.sa_mask, SIGUSR2);
+		sigaction(SIGUSR1, &serv_act, 0);
+		sigaction(SIGUSR2, &serv_act, 0);
+		siginfo.si_pid = pid;
+		if (bit_sender(argv[2], pid))
+			ft_putstr_fd("Message has been sent successfully\n", 1);
+		else
+			ft_putstr_fd("Error: Message has not been sent\n", 1);
+	}
 	return (0);
-} 
+}

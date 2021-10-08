@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gjacqual <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gjacqual <gjacqual@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 15:35:16 by gjacqual          #+#    #+#             */
-/*   Updated: 2021/05/13 21:22:03 by gjacqual         ###   ########.fr       */
+/*   Updated: 2021/10/08 16:46:16 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static	int	ft_size_intstr(int n)
 	i = sign;
 	while (n != 0)
 	{
-		n /=10;
+		n /= 10;
 		i++;
 	}
 	return (i);
