@@ -6,14 +6,14 @@
 /*   By: gjacqual <gjacqual@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 16:57:46 by gjacqual          #+#    #+#             */
-/*   Updated: 2021/10/08 21:03:43 by gjacqual         ###   ########.fr       */
+/*   Updated: 2021/10/09 22:40:13 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 #include "../libft/libft.h"
 
-static void	ft_server_signal_handler(int sig_nb)
+void	ft_server_signal_handler(int sig_nb)
 {
 	if (sig_nb == SIGUSR1)
 	{
@@ -25,31 +25,38 @@ static void	ft_server_signal_handler(int sig_nb)
 	}
 }
 
-static int	ft_bit_decoder(int symbol, int pid)
+int	ft_decoder_step(int pid, int count, int symbol)
+{
+	if ((symbol >> count) & 1)
+	{
+		if (kill(pid, SIGUSR1) != 0)
+		{
+			ft_putstr_fd("Signal error!\n", 1);
+			return (0);
+		}
+	}
+	else
+	{
+		if (kill(pid, SIGUSR2) != 0)
+		{
+			ft_putstr_fd("Signal error!\n", 1);
+			return (0);
+		}
+	}	
+	return (1);
+}
+
+static int	ft_bit_decoder_step(int symbol, int pid)
 {	
 	int	count;
 
 	count = 0;
 	while (count < 8)
 	{
-		if ((symbol >> count) & 1)
-		{
-			if (kill(pid, SIGUSR1) != 0)
-			{
-				ft_putstr_fd("Signal error!\n", 1);
-				return (0);
-			}
-		}
-		else
-		{
-			if (kill(pid, SIGUSR2) != 0)
-			{
-				ft_putstr_fd("Signal error!\n", 1);
-				return (0);
-			}
-		}
+		if (ft_decoder2(pid, count, symbol) == 0)
+			return (0);
 		count++;
-		usleep(100);
+		//usleep(100);
 	}
 	return (1);
 }
@@ -88,9 +95,17 @@ int	main(int argc, char **argv)
 		sigaction(SIGUSR2, &serv_act, 0);
 		siginfo.si_pid = pid;
 		if (bit_sender(argv[2], pid))
+			{
 			ft_putstr_fd("Message has been sent successfully\n", 1);
+			exit(0);	
+			}
 		else
+			{
 			ft_putstr_fd("Error: Message has not been sent\n", 1);
+			exit(0);
+			}
 	}
+	while (1)
+		pause();
 	return (0);
 }

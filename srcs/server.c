@@ -6,7 +6,7 @@
 /*   By: gjacqual <gjacqual@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 01:56:52 by gjacqual          #+#    #+#             */
-/*   Updated: 2021/10/09 22:00:58 by gjacqual         ###   ########.fr       */
+/*   Updated: 2021/10/09 22:36:50 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	ft_signal_handler(int sig_nb, siginfo_t *sig_info, void *context)
 	(void)context;
 	if (sig_nb == SIGUSR1)
 		symbol |= (1 << count);
+	kill(sig_info->si_pid, SIGUSR2);
 	if (++count == 8)
 	{
 		count = 0;
