@@ -6,7 +6,7 @@
 /*   By: gjacqual <gjacqual@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 01:56:52 by gjacqual          #+#    #+#             */
-/*   Updated: 2021/10/10 14:00:23 by gjacqual         ###   ########.fr       */
+/*   Updated: 2021/10/10 16:03:53 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,28 @@
 
 void	ft_signal_handler(int sig_nb, siginfo_t *sig_info, void *context)
 {
-	static unsigned char		symbol = 0x00;
 	static int					count = 0;
+	static unsigned char		symbol = 0x00;
 
 	(void)context;
 	if (sig_nb == SIGUSR1)
 		symbol |= (1 << count);
-	//kill(sig_info->si_pid, SIGUSR2);
 	if (++count == 8)
 	{
 		count = 0;
+		if (symbol == 0x00)
+		{
+			ft_putchar_fd('\n', 1);
+			return ;
+		}
 		ft_putchar_fd(symbol, 1);
 		symbol = 0x00;
-		if (kill(sig_info->si_pid, SIGUSR1) != 0)
-			ft_putstr_fd("Signal error!\n", 1);
+		// if (kill(sig_info->si_pid, SIGUSR1) != 0)
+		// 	ft_putstr_fd("Signal error!\n", 1);
 	}
+	else
+		if (kill(sig_info->si_pid, SIGUSR2) != 0)
+			ft_putstr_fd("Signal error!\n", 1);
 }
 
 void	ft_putpid(void)
@@ -39,8 +46,7 @@ void	ft_putpid(void)
 	pid = getpid();
 	ft_putstr_fd("Server PID: <<", 1);
 	ft_putnbr_fd(pid, 1);
-	ft_putstr_fd(">>", 1);
-	ft_putchar_fd('\n', 1);
+	ft_putstr_fd(">>\n", 1);
 }
 
 int	main(void)
