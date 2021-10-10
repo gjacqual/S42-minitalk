@@ -6,39 +6,50 @@
 /*   By: gjacqual <gjacqual@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 01:56:52 by gjacqual          #+#    #+#             */
-/*   Updated: 2021/10/08 21:05:54 by gjacqual         ###   ########.fr       */
+/*   Updated: 2021/10/10 18:09:53 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 #include "../libft/libft.h"
 
-static void	ft_signal_handler(int sig_nb, siginfo_t *sig_info, void *context)
+void	ft_signal_handler(int sig_nb, siginfo_t *sig_info, void *context)
 {
-	static unsigned char		symbol = 0x00;
 	static int					count = 0;
+	static unsigned char		symbol = 0x00;
+	static pid_t				cli_pid = 0;
 
 	(void)context;
+	if (cli_pid == 0)
+		cli_pid = sig_info->si_pid;
 	if (sig_nb == SIGUSR1)
 		symbol |= (1 << count);
 	if (++count == 8)
 	{
 		count = 0;
+		if (symbol == 0x00)
+		{
+			ft_putchar_fd('\n', 1);
+			cli_pid = 0;
+			return ;
+		}
 		ft_putchar_fd(symbol, 1);
 		symbol = 0x00;
-		if (kill(sig_info->si_pid, SIGUSR1) != 0)
-			ft_putstr_fd("Signal error!\n", 1);
+		kill(cli_pid, SIGUSR1);
 	}
+	else
+		if (kill(cli_pid, SIGUSR2) != 0)
+			ft_putstr_fd("Signal error!\n", 1);
 }
 
-static void	ft_putpid(void)
+void	ft_putpid(void)
 {
 	int	pid;
 
 	pid = getpid();
-	ft_putstr_fd("PID: ", 1);
+	ft_putstr_fd("Server PID: <<", 1);
 	ft_putnbr_fd(pid, 1);
-	ft_putchar_fd('\n', 1);
+	ft_putstr_fd(">>\n", 1);
 }
 
 int	main(void)
