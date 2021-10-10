@@ -6,14 +6,14 @@
 /*   By: gjacqual <gjacqual@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 01:56:52 by gjacqual          #+#    #+#             */
-/*   Updated: 2021/10/09 23:40:56 by gjacqual         ###   ########.fr       */
+/*   Updated: 2021/10/10 14:00:23 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 #include "../libft/libft.h"
 
-static void	ft_signal_handler(int sig_nb, siginfo_t *sig_info, void *context)
+void	ft_signal_handler(int sig_nb, siginfo_t *sig_info, void *context)
 {
 	static unsigned char		symbol = 0x00;
 	static int					count = 0;
@@ -32,13 +32,14 @@ static void	ft_signal_handler(int sig_nb, siginfo_t *sig_info, void *context)
 	}
 }
 
-static void	ft_putpid(void)
+void	ft_putpid(void)
 {
 	int	pid;
 
 	pid = getpid();
-	ft_putstr_fd("Server PID: ", 1);
+	ft_putstr_fd("Server PID: <<", 1);
 	ft_putnbr_fd(pid, 1);
+	ft_putstr_fd(">>", 1);
 	ft_putchar_fd('\n', 1);
 }
 
