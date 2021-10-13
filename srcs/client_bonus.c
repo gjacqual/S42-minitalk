@@ -6,7 +6,7 @@
 /*   By: gjacqual <gjacqual@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 16:57:46 by gjacqual          #+#    #+#             */
-/*   Updated: 2021/10/10 18:09:37 by gjacqual         ###   ########.fr       */
+/*   Updated: 2021/10/13 12:22:57 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	main(int argc, char **argv)
 			sigaction(SIGUSR2, &serv_act, 0);
 			sig_info.si_pid = serv_pid;
 			if (bit_sender(argv[2], serv_pid))
-				ft_putstr_fd("Message has been sent\n", 1);
+				ft_putstr_fd("Message to bonus server has been sent\n", 1);
 			else
 				ft_putstr_fd("Error: Message has not been sent\n", 1);
 		}
