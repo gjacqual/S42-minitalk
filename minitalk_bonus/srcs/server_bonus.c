@@ -6,7 +6,7 @@
 /*   By: gjacqual <gjacqual@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 01:56:52 by gjacqual          #+#    #+#             */
-/*   Updated: 2021/10/14 20:46:54 by gjacqual         ###   ########.fr       */
+/*   Updated: 2021/10/14 21:25:58 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(void)
 	sig_check2 = sigaction(SIGUSR2, &action, 0);
 	if (sig_check2 != 0)
 		ft_putstr_fd("Signal error!\n", 1);
-	ft_putstr_fd("The Bonus server has started successfully\n", 1);
+	ft_putstr_fd("The server has started successfully\n", 1);
 	while (1)
 		pause();
 	return (0);
