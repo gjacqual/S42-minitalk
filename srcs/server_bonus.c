@@ -6,12 +6,11 @@
 /*   By: gjacqual <gjacqual@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 01:56:52 by gjacqual          #+#    #+#             */
-/*   Updated: 2021/10/13 11:46:00 by gjacqual         ###   ########.fr       */
+/*   Updated: 2021/10/14 15:38:10 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
-#include "../libft/libft.h"
 
 void	ft_signal_handler(int sig_nb, siginfo_t *sig_info, void *context)
 {

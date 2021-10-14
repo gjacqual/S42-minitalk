@@ -6,12 +6,11 @@
 /*   By: gjacqual <gjacqual@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 16:57:46 by gjacqual          #+#    #+#             */
-/*   Updated: 2021/10/13 12:22:57 by gjacqual         ###   ########.fr       */
+/*   Updated: 2021/10/14 15:37:59 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
-#include "../libft/libft.h"
 
 static int	check_real_pid(int serv_pid)
 {
