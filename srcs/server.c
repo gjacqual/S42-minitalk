@@ -6,7 +6,7 @@
 /*   By: gjacqual <gjacqual@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 01:56:52 by gjacqual          #+#    #+#             */
-/*   Updated: 2021/10/14 16:04:24 by gjacqual         ###   ########.fr       */
+/*   Updated: 2021/10/14 19:51:35 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,15 @@ void	ft_signal_handler(int sig_nb, siginfo_t *sig_info, void *context)
 		if (symbol == 0x00)
 		{
 			ft_putchar_fd('\n', 1);
+			kill(cli_pid, SIGUSR1);
 			cli_pid = 0;
 			return ;
 		}
 		ft_putchar_fd(symbol, 1);
 		symbol = 0x00;
-		kill(cli_pid, SIGUSR1);
 	}
-	else
-		if (kill(cli_pid, SIGUSR2) != 0)
-			ft_putstr_fd("Signal error!\n", 1);
+	if (kill(cli_pid, SIGUSR2) != 0)
+		ft_putstr_fd("Signal error!\n", 1);
 }
 
 void	ft_putpid(void)
