@@ -3,7 +3,7 @@ NAME		=	minitalk
 SERVER		:=	server
 CLIENT		:=	client
 
-CC :=  clang
+CC :=  gcc
 CFLAGS	:= -Wall -Wextra -Werror
 RM	= rm -f
 
