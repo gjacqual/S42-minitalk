@@ -10,6 +10,8 @@ RM	= rm -f
 SRC_DIR		:= srcs
 SRC_B_DIR	:= minitalk_bonus/srcs
 
+B_DIR := minitalk_bonus
+
 SRC_SERVER	:= ${SRC_DIR}/server.c ${SRC_DIR}/utils.c
 OBJ_SERVER 	:= ${SRC_SERVER:.c=.o}
 
@@ -35,13 +37,13 @@ ${CLIENT}: ${OBJ_CLIENT} minitalk.h
 	@echo "client is ready"	
 
 bonus:  server_bonus client_bonus
-
-server_bonus: ${OBJ_SERVER_B} minitalk_bonus/minitalk_bonus.h
-	@ ${CC} ${CFLAGS} -I minitalk_bonus -o ${SERVER} ${OBJ_SERVER_B}
+		
+server_bonus: ${OBJ_SERVER_B} ${B_DIR}/minitalk_bonus.h
+	@ ${CC} ${CFLAGS} -I ${B_DIR} -o ${SERVER} ${OBJ_SERVER_B}
 	@echo "server bonus is ready"	
 
-client_bonus: ${OBJ_CLIENT_B} minitalk_bonus/minitalk_bonus.h
-	@ ${CC} ${CFLAGS} -I minitalk_bonus -o ${CLIENT} ${OBJ_CLIENT_B}
+client_bonus: ${OBJ_CLIENT_B} ${B_DIR}/minitalk_bonus.h
+	@ ${CC} ${CFLAGS} -I ${B_DIR} -o ${CLIENT} ${OBJ_CLIENT_B}
 	@echo "client bonus is ready"	
 
 clean:
