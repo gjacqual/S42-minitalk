@@ -4,4 +4,5 @@ The project is completed
 
 Usage:
 ./server 
+
 ./client SERVER_PID "$(cat texts/FILE.txt)"
